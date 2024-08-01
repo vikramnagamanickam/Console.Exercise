@@ -2,6 +2,7 @@
 using ListOfProject;
 using System.Net;
 using System.Net.Mail;
+using FileReadandWrite;
 
 
 namespace ConsoleForTask
@@ -10,8 +11,14 @@ namespace ConsoleForTask
     {
         static void Main(string[] args)
         {
-            Smtp data = new Smtp();
-            data.send();
+            ReadAndWrite data = new ReadAndWrite();
+            data.File();
+
+
+
+
+           // Smtp data = new Smtp();
+           //data.send();
         }
     }
 }
