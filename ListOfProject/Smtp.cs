@@ -5,16 +5,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
+using System.IO;
 
 namespace ListOfProject
 {
     public class Smtp
     {
+        public void FileLog()
+        {
+            string file = $"File_{DateTime.Now.ToString("yyyy-MM-dd")}.txt";
+            try
+            {
+                send();
+                StreamWriter sw = new StreamWriter($"D:{file}.txt",false);
+                
+                sw.WriteLine($"Successfully sent Mail in{DateTime.Now.ToString("yyyy-MM-dd")}");
+                sw.Close();
+            }
+            catch (Exception e)
+            {
+                StreamWriter sw1 = new StreamWriter($"D:{file}.txt",false);
+                sw1.WriteLine(e.StackTrace);
+                sw1.Close();
+            }
+        }
         public void send()
         {
             Console.WriteLine("Hello World!");
             SendEmail(GetUserName(), GetPassword());
-            Console.ReadLine();
+          
+
         }
 
         public static void SendEmail(string fromAddress, string password)
@@ -39,7 +59,7 @@ namespace ListOfProject
             }
             catch (SmtpException e)
             {
-                Console.WriteLine(e);
+                throw;
             }
 
         }
@@ -54,7 +74,9 @@ namespace ListOfProject
         }
         public static string ToAddress()
         {
-            return "Sureshkumar.duraisamy@AnaiyaanTechnologies.com";
+            return "nagamanickamvikram@gmail.com";
+           // return "Sureshkumar.duraisamy@AnaiyaanTechnologies.com";
         }
+       
     }
 }

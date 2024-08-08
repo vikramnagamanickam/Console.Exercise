@@ -11,7 +11,7 @@ namespace FileReadandWrite
    public class ReadAndWrite
    {
     public void File()
-    {
+    { 
         string data;
         StreamReader Reader = null;
         StreamWriter writer = null;

@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\JsonReader\JsonReader.csproj" />
     <ProjectReference Include="..\ListOfProject\Exercise.csproj" />
     <ProjectReference Include="..\ReadandWrite\ReadandWrite.csproj" />
   </ItemGroup>

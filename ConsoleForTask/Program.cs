@@ -3,7 +3,7 @@ using ListOfProject;
 using System.Net;
 using System.Net.Mail;
 using FileReadandWrite;
-
+using JsonReader;
 
 namespace ConsoleForTask
 {
@@ -11,14 +11,20 @@ namespace ConsoleForTask
     {
         static void Main(string[] args)
         {
-            ReadAndWrite data = new ReadAndWrite();
-            data.File();
+            ReadJsonData obj = new ReadJsonData();
+            obj.Read();
+
+
+
+            //ReadAndWrite data = new ReadAndWrite();
+            //  WDdata.File();
 
 
 
 
-           // Smtp data = new Smtp();
-           //data.send();
+            // Smtp data1 = new Smtp();
+            //data1.FileLog();
+
         }
     }
 }
