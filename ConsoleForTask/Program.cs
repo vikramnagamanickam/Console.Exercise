@@ -4,6 +4,9 @@ using System.Net;
 using System.Net.Mail;
 using FileReadandWrite;
 using JsonReader;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace ConsoleForTask
 {
@@ -11,8 +14,20 @@ namespace ConsoleForTask
     {
         static void Main(string[] args)
         {
-            ReadJsonData obj = new ReadJsonData();
-            obj.Read();
+
+            var serviceCollection = new ServiceCollection();
+            IConfiguration configuration;
+            configuration = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
+                .AddJsonFile("appsetting.json")
+                .Build();
+            serviceCollection.AddSingleton<IConfiguration>(configuration);
+
+
+
+
+          //  ReadJsonData obj = new ReadJsonData();
+            //obj.Read();
 
 
 
@@ -22,8 +37,8 @@ namespace ConsoleForTask
 
 
 
-            // Smtp data1 = new Smtp();
-            //data1.FileLog();
+            Smtp data1 = new Smtp(configuration);
+            data1.FileLog();
 
         }
     }

@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Net.Mail;
 using System.IO;
+using Microsoft.Extensions.Configuration;
 
 namespace ListOfProject
 {
     public class Smtp
     {
+        private readonly IConfiguration configuration;
+        public Smtp(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
         public void FileLog()
         {
             string file = $"File_{DateTime.Now.ToString("yyyy-MM-dd")}.txt";
@@ -37,7 +44,7 @@ namespace ListOfProject
 
         }
 
-        public static void SendEmail(string fromAddress, string password)
+        public  void SendEmail(string fromAddress, string password)
         {
             using SmtpClient email = new SmtpClient
             {
@@ -63,18 +70,20 @@ namespace ListOfProject
             }
 
         }
-        public static string GetUserName()
+        public  string GetUserName()
         {
-            return "nagamanickamvikram@gmail.com";
+            var dataFromjsonFile = configuration.GetSection("From").Value;
+            return dataFromjsonFile;
             
         }
         public static string GetPassword()
         {
             return "nzkrwtkssqzcuwal";
         }
-        public static string ToAddress()
+        public  string ToAddress()
         {
-            return "nagamanickamvikram@gmail.com";
+            var dataFromjsonFile1 = configuration.GetSection("To").Value;
+            return dataFromjsonFile1;
            // return "Sureshkumar.duraisamy@AnaiyaanTechnologies.com";
         }
        

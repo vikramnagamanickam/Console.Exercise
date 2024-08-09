@@ -11,4 +11,10 @@
     <ProjectReference Include="..\ReadandWrite\ReadandWrite.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="appsetting.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
