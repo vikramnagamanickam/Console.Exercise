@@ -7,22 +7,42 @@ using System.Net;
 using System.Net.Mail;
 using System.IO;
 using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 
 namespace ListOfProject
 {
     public class Smtp
     {
+
         private readonly IConfiguration configuration;
         public Smtp(IConfiguration configuration)
         {
             this.configuration = configuration;
         }
-
+        string body = $"this is main email @{DateTime.UtcNow:F}";
+        public void BodyWriter()
+        {
+            try
+            {
+                string Filepath = "C:\\Users\\Admin\\source\\repos\\ConsoleForTask\\ConsoleForTask\\WeatherForecast-Result (2).json";
+                string Json = File.ReadAllText(Filepath);
+                List<WeatherForeCast> Result = JsonConvert.DeserializeObject<List<WeatherForeCast>>(Json);
+                foreach (var source in Result)
+                {
+                    body += $"date:{source.Date},summary:{source.summary},tempratureC:{source.TempratureC},tempratureF:{source.TempratureF} \n";
+                }
+            }
+            catch(Exception e)
+            {
+                body += e;
+            }
+        }
         public void FileLog()
         {
             string file = $"File_{DateTime.Now.ToString("yyyy-MM-dd")}.txt";
             try
             {
+                BodyWriter();
                 send();
                 StreamWriter sw = new StreamWriter($"D:{file}.txt",false);
                 
@@ -56,10 +76,11 @@ namespace ListOfProject
                 Credentials = new NetworkCredential(userName: fromAddress, password),
 
             };
-            string subject = "youtube";
-            string body = $"this is main email @{DateTime.UtcNow:F}";
+            string subject = "reminder";
+           
             try
             {
+                Console.WriteLine($" {fromAddress}, {ToAddress()}{ subject}{body}");
                 Console.WriteLine("sending email ");
                 email.Send(fromAddress, ToAddress(), subject, body);
                 Console.WriteLine("email sent ");

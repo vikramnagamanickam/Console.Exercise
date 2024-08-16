@@ -6,9 +6,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\JsonReader\JsonReader.csproj" />
     <ProjectReference Include="..\ListOfProject\Exercise.csproj" />
     <ProjectReference Include="..\ReadandWrite\ReadandWrite.csproj" />
+    <ProjectReference Include="..\ReadWeatherDataFromJSON\ReadWeatherDataFromJSON.csproj" />
   </ItemGroup>
 
   <ItemGroup>

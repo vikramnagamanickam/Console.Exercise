@@ -3,24 +3,38 @@ using ListOfProject;
 using System.Net;
 using System.Net.Mail;
 using FileReadandWrite;
-using JsonReader;
+//using JsonReader;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
+using ReadWeatherDataFromJSON;
+
 namespace ConsoleForTask
 {
-    class Program
+   public class Program
     {
         static void Main(string[] args)
         {
 
-            var serviceCollection = new ServiceCollection();
+
+            //  JsonRead data = new JsonRead();
+            // data.Climate();
+
+
+
+           
+
+                
+
+           var serviceCollection = new ServiceCollection();
             IConfiguration configuration;
-            configuration = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
+           configuration = new ConfigurationBuilder()
+               .SetBasePath(Directory.GetParent(AppContext.BaseDirectory).FullName)
                 .AddJsonFile("appsetting.json")
                 .Build();
+            
+            
             serviceCollection.AddSingleton<IConfiguration>(configuration);
 
 
@@ -37,7 +51,7 @@ namespace ConsoleForTask
 
 
 
-            Smtp data1 = new Smtp(configuration);
+           Smtp data1 = new Smtp(configuration);
             data1.FileLog();
 
         }
